@@ -3,6 +3,9 @@ import '@nomiclabs/hardhat-solhint';
 import 'hardhat-contract-sizer';
 import { HardhatUserConfig } from 'hardhat/config';
 import { MochaOptions } from 'mocha';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 interface EnvOptions {
   PROFILE?: boolean;
@@ -35,7 +38,19 @@ const config: HardhatUserConfig = {
         accountsBalance: '10000000000000000000000000000000000000000000000'
       },
       allowUnlimitedContractSize: true
-    }
+    },
+    humanityArbitrum: {
+      chainId: 7080969,
+      url: 'https://humanity-testnet.g.alchemy.com/public',
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : undefined,
+      timeout: 50000,
+    },
+    humanityMainnet: {
+      url: `https://humanity-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`,
+      chainId: 6985385,
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : undefined,
+      timeout: 50000,
+    },
   },
 
   solidity: {
